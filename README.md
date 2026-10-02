@@ -1,47 +1,32 @@
-# Rehan Public School — School Management System
+# Profile Edit Feature
 
-A complete frontend School Management System + Public Website built with HTML5, CSS3, and Vanilla JavaScript.
-
-## How to Run
-
-1. Open `index.html` in a modern browser (Chrome, Firefox, Edge)
-2. Click **Login** to access the management portal
-3. Use demo accounts:
-
-| Role    | Email                      | Password   |
-|---------|----------------------------|------------|
-| Admin   | admin@rehan-school.com     | admin123   |
-| Teacher | teacher@rehan-school.com   | teacher123 |
-| Student | student@rehan-school.com   | student123 |
-| Parent  | parent@rehan-school.com    | parent123  |
+Simple profile page with **Edit Profile** functionality (matches your screenshot design).
 
 ## Features
+- View profile (Name, Email, Phone, Role, User ID)
+- **Edit Profile** button → opens modal form
+- Update name, email, phone, role
+- Data saved in browser `localStorage` (persists after refresh)
+- Responsive design (mobile friendly)
+- Toast notification on save
 
-- Public school website with admissions, events, gallery, contact
-- Role-based access (Admin, Teacher, Student, Parent)
-- Full CRUD for Students, Teachers, Parents, Staff, Classes, Subjects
-- Attendance marking with statistics
-- Timetable management
-- Exam & Results with auto grade calculation
-- Fee collection with payment tracking
-- Payroll, Expenses, Finance dashboard with charts
-- Library, Transport, Inventory
-- Homework, Assignments, Quizzes
-- Notices, Events, Calendar
-- Certificates & ID Card generators
-- Reports center with print
-- Leave management, PTM, Visitors, Complaints, Discipline
-- Achievements, Gallery, Communication
-- Activity log, Notifications
-- Dark mode, responsive design
-- Backup/Restore (JSON export/import)
-- LocalStorage data persistence
+## How to run
+1. Unzip the folder
+2. Open `index.html` in any browser (Chrome / Edge / Firefox)
+3. Click **Edit Profile** button
+4. Change details → Save Changes
 
-## Tech Stack
+## Files
+```
+profile-edit-feature/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── app.js
+└── README.md
+```
 
-- HTML5 + CSS3 (CSS Variables, Flexbox, Grid)
-- Vanilla JavaScript ES6+
-- Chart.js (CDN) for dashboard charts
-- LocalStorage for all data
-
-No frameworks. No backend. Works offline after first load.
+## Note
+This is a frontend-only demo.  
+Agar aapke project mein backend (Firebase / Supabase / API) hai to batao, main uske hisaab se integrate kar dunga.
