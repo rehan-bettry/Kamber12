@@ -443,3 +443,120 @@ body {
     padding: 24px 14px;
   }
 }
+
+/* ========== Profile Photo Upload ========== */
+.photo-upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.photo-preview-wrap {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.photo-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3182ce, #2b6cb0);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  overflow: hidden;
+  border: 3px solid #e2e8f0;
+  background-size: cover;
+  background-position: center;
+}
+
+.photo-preview.has-image {
+  background-color: transparent;
+  font-size: 0;
+}
+
+.photo-change-btn {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #3182ce;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.2s;
+}
+
+.photo-change-btn:hover {
+  background: #2b6cb0;
+}
+
+.photo-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.btn-photo {
+  background: #edf2f7;
+  border: 1px solid #e2e8f0;
+  color: #2d3748;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-photo:hover {
+  background: #e2e8f0;
+}
+
+.btn-photo-remove {
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  color: #c53030;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-photo-remove:hover {
+  background: #fed7d7;
+}
+
+.photo-hint {
+  font-size: 12px;
+  color: #a0aec0;
+  margin-top: 4px;
+}
+
+/* Avatar with image support */
+.avatar-lg.has-image,
+.avatar-sm.has-image {
+  background-size: cover !important;
+  background-position: center !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  border: 3px solid rgba(255,255,255,0.4);
+}
+
+.avatar-sm.has-image {
+  border: 2px solid #e2e8f0;
+}
