@@ -3,81 +3,174 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Profile - Edit Feature</title>
+  <title>My Profile</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Top Navbar -->
-  <header class="navbar">
-    <div class="nav-left">
-      <span class="nav-title">Profile</span>
-      <div class="search-box">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.35-4.35"></path>
-        </svg>
-        <input type="text" placeholder="Search...">
-      </div>
-    </div>
-    <div class="nav-right">
-      <button class="icon-btn" title="Theme">🌓</button>
-      <button class="icon-btn notification" title="Notifications">
-        🔔 <span class="badge">3</span>
-      </button>
-      <button class="icon-btn" title="Messages">✉️</button>
-      <div class="user-chip">
-        <div class="avatar-sm" id="navAvatar">RA</div>
-        <div class="user-info">
-          <span class="name" id="navName">Rehan Ali</span>
-          <span class="role" id="navRole">Admin</span>
+  <div class="app-layout">
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">RS</span>
+          <span class="logo-text">Rehan School</span>
         </div>
+        <button class="sidebar-close" id="sidebarClose" onclick="toggleSidebar()">×</button>
       </div>
-    </div>
-  </header>
 
-  <main class="container">
-    <h1 class="page-title">My Profile</h1>
-
-    <!-- Profile Card -->
-    <div class="profile-card">
-      <!-- Header with gradient -->
-      <div class="profile-header">
-        <div class="avatar-lg" id="profileAvatar">RA</div>
-        <div class="header-info">
-          <h2 id="displayName">Rehan Ali</h2>
-          <p id="displayRole">Admin</p>
-        </div>
-        <button class="edit-btn" id="editBtn" onclick="openEditModal()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
           </svg>
-          Edit Profile
-        </button>
-      </div>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>Users</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>Courses</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Attendance</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+          <span>Reports</span>
+        </a>
+        <a href="#" class="nav-item active">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Profile</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Settings</span>
+        </a>
+      </nav>
 
-      <!-- Details -->
-      <div class="profile-details">
-        <div class="detail-item">
-          <span class="label">USER ID</span>
-          <span class="value" id="displayUserId">USR001</span>
-        </div>
-        <div class="detail-item">
-          <span class="label">EMAIL</span>
-          <span class="value" id="displayEmail">admin@rehan-school.com</span>
-        </div>
-        <div class="detail-item">
-          <span class="label">PHONE</span>
-          <span class="value" id="displayPhone">03322131388</span>
-        </div>
-        <div class="detail-item">
-          <span class="label">ROLE</span>
-          <span class="value" id="displayRole2">Admin</span>
-        </div>
+      <div class="sidebar-footer">
+        <a href="#" class="nav-item logout">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Logout</span>
+        </a>
       </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <div class="main-wrapper">
+      <!-- Top Navbar -->
+      <header class="navbar">
+        <div class="nav-left">
+          <button class="menu-btn" id="menuBtn" onclick="toggleSidebar()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <span class="nav-title">Profile</span>
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input type="text" placeholder="Search...">
+          </div>
+        </div>
+        <div class="nav-right">
+          <button class="icon-btn" title="Theme">🌓</button>
+          <button class="icon-btn notification" title="Notifications">
+            🔔 <span class="badge">3</span>
+          </button>
+          <button class="icon-btn" title="Messages">✉️</button>
+          <div class="user-chip">
+            <div class="avatar-sm" id="navAvatar">RA</div>
+            <div class="user-info">
+              <span class="name" id="navName">Rehan Ali</span>
+              <span class="role" id="navRole">Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="container">
+        <h1 class="page-title">My Profile</h1>
+
+        <!-- Profile Card -->
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="avatar-lg" id="profileAvatar">RA</div>
+            <div class="header-info">
+              <h2 id="displayName">Rehan Ali</h2>
+              <p id="displayRole">Admin</p>
+            </div>
+            <button class="edit-btn" id="editBtn" onclick="openEditModal()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+              Edit Profile
+            </button>
+          </div>
+
+          <div class="profile-details">
+            <div class="detail-item">
+              <span class="label">USER ID</span>
+              <span class="value" id="displayUserId">USR001</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">EMAIL</span>
+              <span class="value" id="displayEmail">admin@rehan-school.com</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">PHONE</span>
+              <span class="value" id="displayPhone">03322131388</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">ROLE</span>
+              <span class="value" id="displayRole2">Admin</span>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-  </main>
+  </div>
 
   <!-- Edit Modal -->
   <div class="modal-overlay" id="editModal">
