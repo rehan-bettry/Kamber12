@@ -1,4 +1,3 @@
-// Default profile
 const DEFAULT_PROFILE = {
   userId: "USR001",
   name: "Rehan Ali",
@@ -13,7 +12,7 @@ let tempPhoto = null;
 function loadProfile() {
   const saved = localStorage.getItem("userProfile");
   if (saved) {
-    try { return JSON.parse(saved); } 
+    try { return JSON.parse(saved); }
     catch (e) { return { ...DEFAULT_PROFILE }; }
   }
   return { ...DEFAULT_PROFILE };
@@ -28,6 +27,7 @@ function getInitials(name) {
 }
 
 function setAvatar(el, profile) {
+  if (!el) return;
   if (profile.photo) {
     el.style.backgroundImage = `url(${profile.photo})`;
     el.classList.add("has-image");
@@ -41,15 +41,21 @@ function setAvatar(el, profile) {
 
 function renderProfile(profile) {
   setAvatar(document.getElementById("profileAvatar"), profile);
+  setAvatar(document.getElementById("navAvatar"), profile);
+  setAvatar(document.getElementById("sidebarAvatar"), profile);
+
   document.getElementById("displayName").textContent = profile.name;
   document.getElementById("displayRole").textContent = profile.role;
   document.getElementById("displayUserId").textContent = profile.userId;
   document.getElementById("displayEmail").textContent = profile.email;
   document.getElementById("displayPhone").textContent = profile.phone;
   document.getElementById("displayRole2").textContent = profile.role;
-  setAvatar(document.getElementById("navAvatar"), profile);
+
   document.getElementById("navName").textContent = profile.name;
   document.getElementById("navRole").textContent = profile.role;
+
+  const sn = document.getElementById("sidebarName");
+  if (sn) sn.textContent = profile.name;
 }
 
 function updatePhotoPreview(photo, name) {
@@ -144,47 +150,56 @@ function showToast(message, success = true) {
   setTimeout(() => toast.classList.remove("show"), 2800);
 }
 
-// Sidebar toggle
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
   document.getElementById("sidebarOverlay").classList.toggle("active");
 }
 
-// Page switching (Students, Teachers etc.)
-function showPage(pageName) {
-  // Hide all pages
+// Proper page switching - only one page visible
+function showPage(pageName, clickedEl) {
+  // Hide ALL pages
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  
-  // Show selected page
+
+  // Show selected
   const page = document.getElementById("page-" + pageName);
   if (page) page.classList.add("active");
 
-  // Update page title
+  // Title
   const titles = {
     dashboard: "Dashboard",
     students: "Students",
     teachers: "Teachers",
     classes: "Classes",
     attendance: "Attendance",
-    reports: "Reports",
-    profile: "Profile",
+    subjects: "Subjects",
+    exams: "Exams & Results",
+    timetable: "Timetable",
+    homework: "Homework",
+    fees: "Fees & Payments",
+    salary: "Salary",
+    notices: "Notices",
+    messages: "Messages",
+    profile: "My Profile",
     settings: "Settings"
   };
   document.getElementById("pageTitle").textContent = titles[pageName] || pageName;
 
-  // Update active nav item
+  // Active nav
   document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
-  const activeLink = document.querySelector(`.nav-item[onclick*="'${pageName}'"]`);
-  if (activeLink) activeLink.classList.add("active");
+  if (clickedEl) {
+    clickedEl.classList.add("active");
+  } else {
+    const link = document.querySelector(`.nav-item[data-page="${pageName}"]`);
+    if (link) link.classList.add("active");
+  }
 
-  // Close sidebar on mobile after click
+  // Close mobile sidebar
   if (window.innerWidth <= 900) {
     document.getElementById("sidebar").classList.remove("open");
     document.getElementById("sidebarOverlay").classList.remove("active");
   }
 }
 
-// Modal close on overlay
 document.getElementById("editModal").addEventListener("click", function (e) {
   if (e.target === this) closeEditModal();
 });
@@ -192,14 +207,10 @@ document.getElementById("editModal").addEventListener("click", function (e) {
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     closeEditModal();
-    if (document.getElementById("sidebar").classList.contains("open")) {
-      toggleSidebar();
-    }
+    if (document.getElementById("sidebar").classList.contains("open")) toggleSidebar();
   }
 });
 
-// Init
 document.addEventListener("DOMContentLoaded", function () {
-  const profile = loadProfile();
-  renderProfile(profile);
+  renderProfile(loadProfile());
 });
