@@ -3,135 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Profile - Rehan School</title>
+  <title>Rehan School - Admin Panel</title>
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="app-layout">
-    <!-- ========== SIDEBAR ========== -->
+    <!-- ========== PREMIUM SIDEBAR ========== -->
     <aside class="sidebar" id="sidebar">
+      <!-- Logo -->
       <div class="sidebar-header">
         <div class="logo">
-          <span class="logo-icon">RS</span>
-          <span class="logo-text">Rehan School</span>
+          <div class="logo-icon">RS</div>
+          <div class="logo-text-wrap">
+            <span class="logo-text">Rehan School</span>
+            <span class="logo-sub">Admin Panel</span>
+          </div>
         </div>
         <button class="sidebar-close" onclick="toggleSidebar()">×</button>
       </div>
 
+      <!-- User mini card -->
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar" id="sidebarAvatar">RA</div>
+        <div class="sidebar-user-info">
+          <span class="sidebar-user-name" id="sidebarName">Rehan Ali</span>
+          <span class="sidebar-user-role">Admin • Online</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
       <nav class="sidebar-nav">
-        <a href="#" class="nav-item" onclick="showPage('dashboard')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-          </svg>
+        <div class="nav-section-label">MAIN</div>
+        
+        <a href="#" class="nav-item" data-page="dashboard" onclick="showPage('dashboard', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           <span>Dashboard</span>
         </a>
 
-        <a href="#" class="nav-item" onclick="showPage('students')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
+        <a href="#" class="nav-item" data-page="students" onclick="showPage('students', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <span>Students</span>
+          <span class="nav-badge">248</span>
         </a>
 
-        <a href="#" class="nav-item" onclick="showPage('teachers')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
+        <a href="#" class="nav-item" data-page="teachers" onclick="showPage('teachers', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span>Teachers</span>
+          <span class="nav-badge">42</span>
         </a>
 
-        <a href="#" class="nav-item" onclick="showPage('classes')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-          </svg>
+        <a href="#" class="nav-item" data-page="classes" onclick="showPage('classes', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           <span>Classes</span>
         </a>
 
-        <a href="#" class="nav-item" onclick="showPage('attendance')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
+        <a href="#" class="nav-item" data-page="attendance" onclick="showPage('attendance', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           <span>Attendance</span>
         </a>
 
-        <a href="#" class="nav-item" onclick="showPage('reports')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-          </svg>
-          <span>Reports</span>
+        <div class="nav-section-label">ACADEMICS</div>
+
+        <a href="#" class="nav-item" data-page="subjects" onclick="showPage('subjects', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span>Subjects</span>
         </a>
 
-        <a href="#" class="nav-item active" onclick="showPage('profile')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-          <span>Profile</span>
+        <a href="#" class="nav-item" data-page="exams" onclick="showPage('exams', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>Exams & Results</span>
         </a>
 
-        <a href="#" class="nav-item" onclick="showPage('settings')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-          </svg>
+        <a href="#" class="nav-item" data-page="timetable" onclick="showPage('timetable', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Timetable</span>
+        </a>
+
+        <a href="#" class="nav-item" data-page="homework" onclick="showPage('homework', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <span>Homework</span>
+        </a>
+
+        <div class="nav-section-label">FINANCE</div>
+
+        <a href="#" class="nav-item" data-page="fees" onclick="showPage('fees', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>Fees & Payments</span>
+        </a>
+
+        <a href="#" class="nav-item" data-page="salary" onclick="showPage('salary', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span>Salary</span>
+        </a>
+
+        <div class="nav-section-label">COMMUNICATION</div>
+
+        <a href="#" class="nav-item" data-page="notices" onclick="showPage('notices', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span>Notices</span>
+          <span class="nav-badge red">5</span>
+        </a>
+
+        <a href="#" class="nav-item" data-page="messages" onclick="showPage('messages', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Messages</span>
+        </a>
+
+        <div class="nav-section-label">ACCOUNT</div>
+
+        <a href="#" class="nav-item active" data-page="profile" onclick="showPage('profile', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>My Profile</span>
+        </a>
+
+        <a href="#" class="nav-item" data-page="settings" onclick="showPage('settings', this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
           <span>Settings</span>
         </a>
       </nav>
 
+      <!-- Footer -->
       <div class="sidebar-footer">
         <a href="#" class="nav-item logout">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16 17 21 12 16 7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           <span>Logout</span>
         </a>
       </div>
     </aside>
 
-    <!-- Overlay for mobile -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- ========== MAIN CONTENT ========== -->
+    <!-- ========== MAIN ========== -->
     <div class="main-wrapper">
-      <!-- Top Navbar -->
       <header class="navbar">
         <div class="nav-left">
           <button class="menu-btn" onclick="toggleSidebar()">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
-          <span class="nav-title" id="pageTitle">Profile</span>
+          <span class="nav-title" id="pageTitle">My Profile</span>
           <div class="search-box">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.35-4.35"></path>
-            </svg>
-            <input type="text" placeholder="Search...">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" placeholder="Search students, teachers...">
           </div>
         </div>
         <div class="nav-right">
           <button class="icon-btn" title="Theme">🌓</button>
-          <button class="icon-btn notification" title="Notifications">
-            🔔 <span class="badge">3</span>
-          </button>
+          <button class="icon-btn notification" title="Notifications">🔔 <span class="badge">3</span></button>
           <button class="icon-btn" title="Messages">✉️</button>
           <div class="user-chip">
             <div class="avatar-sm" id="navAvatar">RA</div>
@@ -144,7 +162,7 @@
       </header>
 
       <main class="container">
-        <!-- PROFILE PAGE -->
+        <!-- PROFILE -->
         <div id="page-profile" class="page active">
           <h1 class="page-title">My Profile</h1>
           <div class="profile-card">
@@ -155,89 +173,34 @@
                 <p id="displayRole">Admin</p>
               </div>
               <button class="edit-btn" onclick="openEditModal()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                </svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                 Edit Profile
               </button>
             </div>
             <div class="profile-details">
-              <div class="detail-item">
-                <span class="label">USER ID</span>
-                <span class="value" id="displayUserId">USR001</span>
-              </div>
-              <div class="detail-item">
-                <span class="label">EMAIL</span>
-                <span class="value" id="displayEmail">admin@rehan-school.com</span>
-              </div>
-              <div class="detail-item">
-                <span class="label">PHONE</span>
-                <span class="value" id="displayPhone">03322131388</span>
-              </div>
-              <div class="detail-item">
-                <span class="label">ROLE</span>
-                <span class="value" id="displayRole2">Admin</span>
-              </div>
+              <div class="detail-item"><span class="label">USER ID</span><span class="value" id="displayUserId">USR001</span></div>
+              <div class="detail-item"><span class="label">EMAIL</span><span class="value" id="displayEmail">admin@rehan-school.com</span></div>
+              <div class="detail-item"><span class="label">PHONE</span><span class="value" id="displayPhone">03322131388</span></div>
+              <div class="detail-item"><span class="label">ROLE</span><span class="value" id="displayRole2">Admin</span></div>
             </div>
           </div>
         </div>
 
-        <!-- STUDENTS PAGE -->
-        <div id="page-students" class="page">
-          <h1 class="page-title">Students</h1>
-          <div class="simple-card">
-            <p>Students list yahan aayegi. (Yahan aap apna original Students page code laga sakte ho)</p>
-          </div>
-        </div>
-
-        <!-- TEACHERS PAGE -->
-        <div id="page-teachers" class="page">
-          <h1 class="page-title">Teachers</h1>
-          <div class="simple-card">
-            <p>Teachers list yahan aayegi. (Yahan aap apna original Teachers page code laga sakte ho)</p>
-          </div>
-        </div>
-
-        <!-- CLASSES PAGE -->
-        <div id="page-classes" class="page">
-          <h1 class="page-title">Classes</h1>
-          <div class="simple-card">
-            <p>Classes list yahan aayegi.</p>
-          </div>
-        </div>
-
-        <!-- ATTENDANCE PAGE -->
-        <div id="page-attendance" class="page">
-          <h1 class="page-title">Attendance</h1>
-          <div class="simple-card">
-            <p>Attendance section yahan aayega.</p>
-          </div>
-        </div>
-
-        <!-- REPORTS PAGE -->
-        <div id="page-reports" class="page">
-          <h1 class="page-title">Reports</h1>
-          <div class="simple-card">
-            <p>Reports section yahan aayega.</p>
-          </div>
-        </div>
-
-        <!-- DASHBOARD PAGE -->
-        <div id="page-dashboard" class="page">
-          <h1 class="page-title">Dashboard</h1>
-          <div class="simple-card">
-            <p>Dashboard overview yahan aayega.</p>
-          </div>
-        </div>
-
-        <!-- SETTINGS PAGE -->
-        <div id="page-settings" class="page">
-          <h1 class="page-title">Settings</h1>
-          <div class="simple-card">
-            <p>Settings yahan aayenge.</p>
-          </div>
-        </div>
+        <!-- Other pages (only one shows at a time) -->
+        <div id="page-dashboard" class="page"><h1 class="page-title">Dashboard</h1><div class="simple-card"><p>Welcome to Rehan School Admin Dashboard.</p></div></div>
+        <div id="page-students" class="page"><h1 class="page-title">Students</h1><div class="simple-card"><p>Students management — yahan original Students page lagao.</p></div></div>
+        <div id="page-teachers" class="page"><h1 class="page-title">Teachers</h1><div class="simple-card"><p>Teachers management — yahan original Teachers page lagao.</p></div></div>
+        <div id="page-classes" class="page"><h1 class="page-title">Classes</h1><div class="simple-card"><p>Classes management section.</p></div></div>
+        <div id="page-attendance" class="page"><h1 class="page-title">Attendance</h1><div class="simple-card"><p>Attendance tracking section.</p></div></div>
+        <div id="page-subjects" class="page"><h1 class="page-title">Subjects</h1><div class="simple-card"><p>Subjects management.</p></div></div>
+        <div id="page-exams" class="page"><h1 class="page-title">Exams & Results</h1><div class="simple-card"><p>Exams and results section.</p></div></div>
+        <div id="page-timetable" class="page"><h1 class="page-title">Timetable</h1><div class="simple-card"><p>Class timetable section.</p></div></div>
+        <div id="page-homework" class="page"><h1 class="page-title">Homework</h1><div class="simple-card"><p>Homework management.</p></div></div>
+        <div id="page-fees" class="page"><h1 class="page-title">Fees & Payments</h1><div class="simple-card"><p>Fee collection and payments.</p></div></div>
+        <div id="page-salary" class="page"><h1 class="page-title">Salary</h1><div class="simple-card"><p>Staff salary management.</p></div></div>
+        <div id="page-notices" class="page"><h1 class="page-title">Notices</h1><div class="simple-card"><p>School notices and announcements.</p></div></div>
+        <div id="page-messages" class="page"><h1 class="page-title">Messages</h1><div class="simple-card"><p>Messages and chat.</p></div></div>
+        <div id="page-settings" class="page"><h1 class="page-title">Settings</h1><div class="simple-card"><p>System settings.</p></div></div>
       </main>
     </div>
   </div>
@@ -253,11 +216,8 @@
         <div class="photo-upload-section">
           <div class="photo-preview-wrap">
             <div class="photo-preview" id="photoPreview">RA</div>
-            <label for="photoInput" class="photo-change-btn" title="Change Photo">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                <circle cx="12" cy="13" r="4"></circle>
-              </svg>
+            <label for="photoInput" class="photo-change-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
             </label>
             <input type="file" id="photoInput" accept="image/*" hidden onchange="handlePhotoSelect(event)">
           </div>
@@ -267,21 +227,10 @@
           </div>
           <p class="photo-hint">JPG, PNG or GIF • Max 2MB</p>
         </div>
-
-        <div class="form-group">
-          <label for="inputName">Full Name</label>
-          <input type="text" id="inputName" required minlength="2" maxlength="50">
-        </div>
-        <div class="form-group">
-          <label for="inputEmail">Email</label>
-          <input type="email" id="inputEmail" required>
-        </div>
-        <div class="form-group">
-          <label for="inputPhone">Phone</label>
-          <input type="tel" id="inputPhone" required pattern="[0-9]{10,15}">
-        </div>
-        <div class="form-group">
-          <label for="inputRole">Role</label>
+        <div class="form-group"><label>Full Name</label><input type="text" id="inputName" required minlength="2"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="inputEmail" required></div>
+        <div class="form-group"><label>Phone</label><input type="tel" id="inputPhone" required pattern="[0-9]{10,15}"></div>
+        <div class="form-group"><label>Role</label>
           <select id="inputRole">
             <option value="Admin">Admin</option>
             <option value="Teacher">Teacher</option>
@@ -289,10 +238,7 @@
             <option value="Staff">Staff</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="inputUserId">User ID (read-only)</label>
-          <input type="text" id="inputUserId" readonly>
-        </div>
+        <div class="form-group"><label>User ID</label><input type="text" id="inputUserId" readonly></div>
         <div class="modal-actions">
           <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
           <button type="submit" class="btn-save">Save Changes</button>
