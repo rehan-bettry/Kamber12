@@ -735,3 +735,20 @@ body {
     padding: 24px 14px;
   }
 }
+
+/* Page switching */
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
+}
+
+.simple-card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  color: #4a5568;
+  font-size: 15px;
+}
