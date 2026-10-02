@@ -1,4 +1,4 @@
-// Default profile data
+// Default profile
 const DEFAULT_PROFILE = {
   userId: "USR001",
   name: "Rehan Ali",
@@ -13,11 +13,8 @@ let tempPhoto = null;
 function loadProfile() {
   const saved = localStorage.getItem("userProfile");
   if (saved) {
-    try {
-      return JSON.parse(saved);
-    } catch (e) {
-      return { ...DEFAULT_PROFILE };
-    }
+    try { return JSON.parse(saved); } 
+    catch (e) { return { ...DEFAULT_PROFILE }; }
   }
   return { ...DEFAULT_PROFILE };
 }
@@ -27,23 +24,18 @@ function saveToStorage(profile) {
 }
 
 function getInitials(name) {
-  return name
-    .split(" ")
-    .map(word => word[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
+  return name.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2);
 }
 
-function setAvatar(element, profile) {
+function setAvatar(el, profile) {
   if (profile.photo) {
-    element.style.backgroundImage = `url(${profile.photo})`;
-    element.classList.add("has-image");
-    element.textContent = "";
+    el.style.backgroundImage = `url(${profile.photo})`;
+    el.classList.add("has-image");
+    el.textContent = "";
   } else {
-    element.style.backgroundImage = "";
-    element.classList.remove("has-image");
-    element.textContent = getInitials(profile.name);
+    el.style.backgroundImage = "";
+    el.classList.remove("has-image");
+    el.textContent = getInitials(profile.name);
   }
 }
 
@@ -51,12 +43,10 @@ function renderProfile(profile) {
   setAvatar(document.getElementById("profileAvatar"), profile);
   document.getElementById("displayName").textContent = profile.name;
   document.getElementById("displayRole").textContent = profile.role;
-
   document.getElementById("displayUserId").textContent = profile.userId;
   document.getElementById("displayEmail").textContent = profile.email;
   document.getElementById("displayPhone").textContent = profile.phone;
   document.getElementById("displayRole2").textContent = profile.role;
-
   setAvatar(document.getElementById("navAvatar"), profile);
   document.getElementById("navName").textContent = profile.name;
   document.getElementById("navRole").textContent = profile.role;
@@ -65,7 +55,6 @@ function renderProfile(profile) {
 function updatePhotoPreview(photo, name) {
   const preview = document.getElementById("photoPreview");
   const removeBtn = document.getElementById("removePhotoBtn");
-
   if (photo) {
     preview.style.backgroundImage = `url(${photo})`;
     preview.classList.add("has-image");
@@ -82,17 +71,14 @@ function updatePhotoPreview(photo, name) {
 function handlePhotoSelect(event) {
   const file = event.target.files[0];
   if (!file) return;
-
   if (!file.type.startsWith("image/")) {
-    showToast("Please select an image file (JPG, PNG, GIF)", false);
+    showToast("Please select an image file", false);
     return;
   }
-
   if (file.size > 2 * 1024 * 1024) {
     showToast("Image size must be less than 2MB", false);
     return;
   }
-
   const reader = new FileReader();
   reader.onload = function (e) {
     tempPhoto = e.target.result;
@@ -109,17 +95,14 @@ function removePhoto() {
 
 function openEditModal() {
   const profile = loadProfile();
-
   document.getElementById("inputName").value = profile.name;
   document.getElementById("inputEmail").value = profile.email;
   document.getElementById("inputPhone").value = profile.phone;
   document.getElementById("inputRole").value = profile.role;
   document.getElementById("inputUserId").value = profile.userId;
-
   tempPhoto = profile.photo || null;
   updatePhotoPreview(tempPhoto, profile.name);
   document.getElementById("photoInput").value = "";
-
   document.getElementById("editModal").classList.add("active");
   document.body.style.overflow = "hidden";
 }
@@ -132,7 +115,6 @@ function closeEditModal() {
 
 function saveProfile(event) {
   event.preventDefault();
-
   const updated = {
     userId: document.getElementById("inputUserId").value,
     name: document.getElementById("inputName").value.trim(),
@@ -141,17 +123,14 @@ function saveProfile(event) {
     role: document.getElementById("inputRole").value,
     photo: tempPhoto
   };
-
   if (!updated.name || updated.name.length < 2) {
     showToast("Name must be at least 2 characters", false);
     return;
   }
-
   if (!updated.email.includes("@")) {
     showToast("Please enter a valid email", false);
     return;
   }
-
   saveToStorage(updated);
   renderProfile(updated);
   closeEditModal();
@@ -162,39 +141,64 @@ function showToast(message, success = true) {
   const toast = document.getElementById("toast");
   toast.textContent = message;
   toast.className = "toast show" + (success ? " success" : "");
-  
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2800);
+  setTimeout(() => toast.classList.remove("show"), 2800);
 }
 
 // Sidebar toggle
 function toggleSidebar() {
-  const sidebar = document.getElementById("sidebar");
-  const overlay = document.getElementById("sidebarOverlay");
-  sidebar.classList.toggle("open");
-  overlay.classList.toggle("active");
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("sidebarOverlay").classList.toggle("active");
 }
 
-// Close modal on overlay click
-document.getElementById("editModal").addEventListener("click", function (e) {
-  if (e.target === this) {
-    closeEditModal();
+// Page switching (Students, Teachers etc.)
+function showPage(pageName) {
+  // Hide all pages
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  
+  // Show selected page
+  const page = document.getElementById("page-" + pageName);
+  if (page) page.classList.add("active");
+
+  // Update page title
+  const titles = {
+    dashboard: "Dashboard",
+    students: "Students",
+    teachers: "Teachers",
+    classes: "Classes",
+    attendance: "Attendance",
+    reports: "Reports",
+    profile: "Profile",
+    settings: "Settings"
+  };
+  document.getElementById("pageTitle").textContent = titles[pageName] || pageName;
+
+  // Update active nav item
+  document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+  const activeLink = document.querySelector(`.nav-item[onclick*="'${pageName}'"]`);
+  if (activeLink) activeLink.classList.add("active");
+
+  // Close sidebar on mobile after click
+  if (window.innerWidth <= 900) {
+    document.getElementById("sidebar").classList.remove("open");
+    document.getElementById("sidebarOverlay").classList.remove("active");
   }
+}
+
+// Modal close on overlay
+document.getElementById("editModal").addEventListener("click", function (e) {
+  if (e.target === this) closeEditModal();
 });
 
-// Close modal / sidebar on Escape
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     closeEditModal();
-    const sidebar = document.getElementById("sidebar");
-    if (sidebar.classList.contains("open")) {
+    if (document.getElementById("sidebar").classList.contains("open")) {
       toggleSidebar();
     }
   }
 });
 
-// Initialize
+// Init
 document.addEventListener("DOMContentLoaded", function () {
   const profile = loadProfile();
   renderProfile(profile);
