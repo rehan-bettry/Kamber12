@@ -1,17 +1,15 @@
-// Default profile data (matches your latest screenshot)
+// Default profile data
 const DEFAULT_PROFILE = {
   userId: "USR001",
   name: "Rehan Ali",
   email: "admin@rehan-school.com",
   phone: "03322131388",
   role: "Admin",
-  photo: null   // base64 string or null
+  photo: null
 };
 
-// Temporary photo while editing (before save)
 let tempPhoto = null;
 
-// Load profile from localStorage or use default
 function loadProfile() {
   const saved = localStorage.getItem("userProfile");
   if (saved) {
@@ -24,12 +22,10 @@ function loadProfile() {
   return { ...DEFAULT_PROFILE };
 }
 
-// Save profile to localStorage
 function saveToStorage(profile) {
   localStorage.setItem("userProfile", JSON.stringify(profile));
 }
 
-// Get initials from name
 function getInitials(name) {
   return name
     .split(" ")
@@ -39,7 +35,6 @@ function getInitials(name) {
     .slice(0, 2);
 }
 
-// Set avatar element (supports photo or initials)
 function setAvatar(element, profile) {
   if (profile.photo) {
     element.style.backgroundImage = `url(${profile.photo})`;
@@ -52,26 +47,21 @@ function setAvatar(element, profile) {
   }
 }
 
-// Update all UI elements with current profile
 function renderProfile(profile) {
-  // Header avatar + name
   setAvatar(document.getElementById("profileAvatar"), profile);
   document.getElementById("displayName").textContent = profile.name;
   document.getElementById("displayRole").textContent = profile.role;
 
-  // Details
   document.getElementById("displayUserId").textContent = profile.userId;
   document.getElementById("displayEmail").textContent = profile.email;
   document.getElementById("displayPhone").textContent = profile.phone;
   document.getElementById("displayRole2").textContent = profile.role;
 
-  // Navbar
   setAvatar(document.getElementById("navAvatar"), profile);
   document.getElementById("navName").textContent = profile.name;
   document.getElementById("navRole").textContent = profile.role;
 }
 
-// Update photo preview in modal
 function updatePhotoPreview(photo, name) {
   const preview = document.getElementById("photoPreview");
   const removeBtn = document.getElementById("removePhotoBtn");
@@ -89,18 +79,15 @@ function updatePhotoPreview(photo, name) {
   }
 }
 
-// Handle file select
 function handlePhotoSelect(event) {
   const file = event.target.files[0];
   if (!file) return;
 
-  // Validate type
   if (!file.type.startsWith("image/")) {
     showToast("Please select an image file (JPG, PNG, GIF)", false);
     return;
   }
 
-  // Validate size (max 2MB)
   if (file.size > 2 * 1024 * 1024) {
     showToast("Image size must be less than 2MB", false);
     return;
@@ -108,20 +95,18 @@ function handlePhotoSelect(event) {
 
   const reader = new FileReader();
   reader.onload = function (e) {
-    tempPhoto = e.target.result; // base64
+    tempPhoto = e.target.result;
     updatePhotoPreview(tempPhoto, document.getElementById("inputName").value);
   };
   reader.readAsDataURL(file);
 }
 
-// Remove photo
 function removePhoto() {
   tempPhoto = null;
   document.getElementById("photoInput").value = "";
   updatePhotoPreview(null, document.getElementById("inputName").value);
 }
 
-// Open edit modal and fill form
 function openEditModal() {
   const profile = loadProfile();
 
@@ -131,25 +116,20 @@ function openEditModal() {
   document.getElementById("inputRole").value = profile.role;
   document.getElementById("inputUserId").value = profile.userId;
 
-  // Set temp photo from saved
   tempPhoto = profile.photo || null;
   updatePhotoPreview(tempPhoto, profile.name);
-
-  // Reset file input
   document.getElementById("photoInput").value = "";
 
   document.getElementById("editModal").classList.add("active");
   document.body.style.overflow = "hidden";
 }
 
-// Close modal
 function closeEditModal() {
   document.getElementById("editModal").classList.remove("active");
   document.body.style.overflow = "";
   tempPhoto = null;
 }
 
-// Save profile from form
 function saveProfile(event) {
   event.preventDefault();
 
@@ -159,10 +139,9 @@ function saveProfile(event) {
     email: document.getElementById("inputEmail").value.trim(),
     phone: document.getElementById("inputPhone").value.trim(),
     role: document.getElementById("inputRole").value,
-    photo: tempPhoto   // can be base64 or null
+    photo: tempPhoto
   };
 
-  // Basic validation
   if (!updated.name || updated.name.length < 2) {
     showToast("Name must be at least 2 characters", false);
     return;
@@ -179,7 +158,6 @@ function saveProfile(event) {
   showToast("Profile updated successfully!", true);
 }
 
-// Toast notification
 function showToast(message, success = true) {
   const toast = document.getElementById("toast");
   toast.textContent = message;
@@ -190,6 +168,14 @@ function showToast(message, success = true) {
   }, 2800);
 }
 
+// Sidebar toggle
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("sidebarOverlay");
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("active");
+}
+
 // Close modal on overlay click
 document.getElementById("editModal").addEventListener("click", function (e) {
   if (e.target === this) {
@@ -197,14 +183,18 @@ document.getElementById("editModal").addEventListener("click", function (e) {
   }
 });
 
-// Close modal on Escape key
+// Close modal / sidebar on Escape
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     closeEditModal();
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar.classList.contains("open")) {
+      toggleSidebar();
+    }
   }
 });
 
-// Initialize on page load
+// Initialize
 document.addEventListener("DOMContentLoaded", function () {
   const profile = loadProfile();
   renderProfile(profile);
