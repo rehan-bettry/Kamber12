@@ -1,32 +1,20 @@
-# Profile Edit Feature
+# Profile Edit Feature + Photo Upload
 
-Simple profile page with **Edit Profile** functionality (matches your screenshot design).
+Profile page with **Edit Profile** + **Profile Picture Upload**.
 
 ## Features
 - View profile (Name, Email, Phone, Role, User ID)
-- **Edit Profile** button → opens modal form
-- Update name, email, phone, role
-- Data saved in browser `localStorage` (persists after refresh)
-- Responsive design (mobile friendly)
-- Toast notification on save
+- **Edit Profile** button → opens modal
+- Upload profile picture (JPG/PNG/GIF, max 2MB)
+- Remove photo option
+- Photo + data saved in browser localStorage
+- Responsive design
 
-## How to run
+## How to use
 1. Unzip the folder
-2. Open `index.html` in any browser (Chrome / Edge / Firefox)
-3. Click **Edit Profile** button
-4. Change details → Save Changes
+2. Open `index.html` in browser
+3. Click **Edit Profile**
+4. Click **Upload Photo** → select image from gallery/camera
+5. Save Changes
 
-## Files
-```
-profile-edit-feature/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   └── app.js
-└── README.md
-```
-
-## Note
-This is a frontend-only demo.  
-Agar aapke project mein backend (Firebase / Supabase / API) hai to batao, main uske hisaab se integrate kar dunga.
+Photo will appear on profile header + navbar avatar.

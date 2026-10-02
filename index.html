@@ -27,9 +27,9 @@
       </button>
       <button class="icon-btn" title="Messages">✉️</button>
       <div class="user-chip">
-        <div class="avatar-sm" id="navAvatar">AU</div>
+        <div class="avatar-sm" id="navAvatar">RA</div>
         <div class="user-info">
-          <span class="name" id="navName">Admin User</span>
+          <span class="name" id="navName">Rehan Ali</span>
           <span class="role" id="navRole">Admin</span>
         </div>
       </div>
@@ -43,9 +43,9 @@
     <div class="profile-card">
       <!-- Header with gradient -->
       <div class="profile-header">
-        <div class="avatar-lg" id="profileAvatar">AU</div>
+        <div class="avatar-lg" id="profileAvatar">RA</div>
         <div class="header-info">
-          <h2 id="displayName">Admin User</h2>
+          <h2 id="displayName">Rehan Ali</h2>
           <p id="displayRole">Admin</p>
         </div>
         <button class="edit-btn" id="editBtn" onclick="openEditModal()">
@@ -69,7 +69,7 @@
         </div>
         <div class="detail-item">
           <span class="label">PHONE</span>
-          <span class="value" id="displayPhone">03001234501</span>
+          <span class="value" id="displayPhone">03322131388</span>
         </div>
         <div class="detail-item">
           <span class="label">ROLE</span>
@@ -87,6 +87,30 @@
         <button class="close-btn" onclick="closeEditModal()">×</button>
       </div>
       <form id="editForm" onsubmit="saveProfile(event)">
+        
+        <!-- Profile Picture Upload -->
+        <div class="photo-upload-section">
+          <div class="photo-preview-wrap">
+            <div class="photo-preview" id="photoPreview">RA</div>
+            <label for="photoInput" class="photo-change-btn" title="Change Photo">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </label>
+            <input type="file" id="photoInput" accept="image/*" hidden onchange="handlePhotoSelect(event)">
+          </div>
+          <div class="photo-actions">
+            <button type="button" class="btn-photo" onclick="document.getElementById('photoInput').click()">
+              Upload Photo
+            </button>
+            <button type="button" class="btn-photo-remove" id="removePhotoBtn" onclick="removePhoto()" style="display:none;">
+              Remove
+            </button>
+          </div>
+          <p class="photo-hint">JPG, PNG or GIF • Max 2MB</p>
+        </div>
+
         <div class="form-group">
           <label for="inputName">Full Name</label>
           <input type="text" id="inputName" required minlength="2" maxlength="50">
