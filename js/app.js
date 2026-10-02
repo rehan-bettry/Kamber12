@@ -1,11 +1,15 @@
-// Default profile data (matches your screenshot)
+// Default profile data (matches your latest screenshot)
 const DEFAULT_PROFILE = {
   userId: "USR001",
-  name: "Admin User",
+  name: "Rehan Ali",
   email: "admin@rehan-school.com",
-  phone: "03001234501",
-  role: "Admin"
+  phone: "03322131388",
+  role: "Admin",
+  photo: null   // base64 string or null
 };
+
+// Temporary photo while editing (before save)
+let tempPhoto = null;
 
 // Load profile from localStorage or use default
 function loadProfile() {
@@ -35,12 +39,23 @@ function getInitials(name) {
     .slice(0, 2);
 }
 
+// Set avatar element (supports photo or initials)
+function setAvatar(element, profile) {
+  if (profile.photo) {
+    element.style.backgroundImage = `url(${profile.photo})`;
+    element.classList.add("has-image");
+    element.textContent = "";
+  } else {
+    element.style.backgroundImage = "";
+    element.classList.remove("has-image");
+    element.textContent = getInitials(profile.name);
+  }
+}
+
 // Update all UI elements with current profile
 function renderProfile(profile) {
-  const initials = getInitials(profile.name);
-
   // Header avatar + name
-  document.getElementById("profileAvatar").textContent = initials;
+  setAvatar(document.getElementById("profileAvatar"), profile);
   document.getElementById("displayName").textContent = profile.name;
   document.getElementById("displayRole").textContent = profile.role;
 
@@ -51,9 +66,59 @@ function renderProfile(profile) {
   document.getElementById("displayRole2").textContent = profile.role;
 
   // Navbar
-  document.getElementById("navAvatar").textContent = initials;
+  setAvatar(document.getElementById("navAvatar"), profile);
   document.getElementById("navName").textContent = profile.name;
   document.getElementById("navRole").textContent = profile.role;
+}
+
+// Update photo preview in modal
+function updatePhotoPreview(photo, name) {
+  const preview = document.getElementById("photoPreview");
+  const removeBtn = document.getElementById("removePhotoBtn");
+
+  if (photo) {
+    preview.style.backgroundImage = `url(${photo})`;
+    preview.classList.add("has-image");
+    preview.textContent = "";
+    removeBtn.style.display = "inline-block";
+  } else {
+    preview.style.backgroundImage = "";
+    preview.classList.remove("has-image");
+    preview.textContent = getInitials(name || "User");
+    removeBtn.style.display = "none";
+  }
+}
+
+// Handle file select
+function handlePhotoSelect(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  // Validate type
+  if (!file.type.startsWith("image/")) {
+    showToast("Please select an image file (JPG, PNG, GIF)", false);
+    return;
+  }
+
+  // Validate size (max 2MB)
+  if (file.size > 2 * 1024 * 1024) {
+    showToast("Image size must be less than 2MB", false);
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    tempPhoto = e.target.result; // base64
+    updatePhotoPreview(tempPhoto, document.getElementById("inputName").value);
+  };
+  reader.readAsDataURL(file);
+}
+
+// Remove photo
+function removePhoto() {
+  tempPhoto = null;
+  document.getElementById("photoInput").value = "";
+  updatePhotoPreview(null, document.getElementById("inputName").value);
 }
 
 // Open edit modal and fill form
@@ -66,6 +131,13 @@ function openEditModal() {
   document.getElementById("inputRole").value = profile.role;
   document.getElementById("inputUserId").value = profile.userId;
 
+  // Set temp photo from saved
+  tempPhoto = profile.photo || null;
+  updatePhotoPreview(tempPhoto, profile.name);
+
+  // Reset file input
+  document.getElementById("photoInput").value = "";
+
   document.getElementById("editModal").classList.add("active");
   document.body.style.overflow = "hidden";
 }
@@ -74,6 +146,7 @@ function openEditModal() {
 function closeEditModal() {
   document.getElementById("editModal").classList.remove("active");
   document.body.style.overflow = "";
+  tempPhoto = null;
 }
 
 // Save profile from form
@@ -85,7 +158,8 @@ function saveProfile(event) {
     name: document.getElementById("inputName").value.trim(),
     email: document.getElementById("inputEmail").value.trim(),
     phone: document.getElementById("inputPhone").value.trim(),
-    role: document.getElementById("inputRole").value
+    role: document.getElementById("inputRole").value,
+    photo: tempPhoto   // can be base64 or null
   };
 
   // Basic validation
